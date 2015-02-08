@@ -1,0 +1,44 @@
+﻿<div class="section section-white app-content">
+    <h2 class="app-list-header">Spillere</h2>
+    <ul class="app-list" id="viewHome-matchList">
+        <li  class="app-list-item app-text" data-id="{{player.Id}}">
+            <div class="app-list-item-icon">
+                <span class="text">?</span>
+            </div>
+            <div class="app-list-item-content">
+                <h2 class="app-list-item-header">Ingen spillere :|</h2>
+                <span class="app-list-item-text">
+                    
+                </span>
+            </div>
+        </li>
+    </ul>
+    <a href="" class="app-button" ng-click="showNewPlayer = ! showNewPlayer">Tilføj spiller1</a>
+    <a href="" ng-click="test()">TEST</a>
+</div>
+<div class="app-footer">
+    <a href="#/match-new" class="app-header-action app-button-action app-button-action-top">+</a>
+</div>
+<div class="app-dialog" ng-show="showNewPlayer">
+    <header class="app-dialog-header">
+        <a ng-click="showNewPlayer = ! showNewPlayer" class="app-dialog-header-close">x</a>
+        <span class="app-dialog-header-text">Ny spiller</span>
+    </header>
+    <form class="app-dialog-form" data-match-id="{{newMatchId}}">
+        <div class="app-dialog-form-select inactive" data-id="">
+            <span class="app-dialog-form-select-value" ng-click="toggleNewPlayerSelect()">Spiller</span>
+            <ul>
+                <li ng-repeat="player in players" ng-click="selectPlayer(player.id)" data-id="{{player.id}}">
+                    {{player.name}} - {{player.nickname}}
+                </li>
+            </ul>
+        </div>
+        <button class="app-button app-button-flat" ng-click="showNewPlayer = ! showNewPlayer">Annuller</button>
+        <button class="app-button">Tilføj spiller</button>
+    </form>
+</div>
+
+<!--<div>
+    <a href="/Scorecard/Create?matchId=36" class="button action-match-addPlayer">Tilføj spiller</a>
+    <a href="/Match/" class="button">Færdig!</a>
+</div>-->
