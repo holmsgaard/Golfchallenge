@@ -1,0 +1,24 @@
+﻿<div id="viewHome" class="view view-active" data-view="home">
+    <header class="app-header app-header-large">
+        <h1 class="app-logo app-logo-large">Golf<br />Challenge</h1>
+        <a href="#/match-new" class="app-header-action app-button-action">+</a>
+    </header>
+
+    <div class="section section-white app-content">
+        <h2 class="app-list-header">Afviklede matches</h2>
+        <ul class="app-list" id="viewHome-matchList">
+            <li ng-repeat="match in matches" class="app-list-item app-text" data-id="{{match.Id}}">
+                <div class="app-list-item-icon">
+                    <span class="icon-trophy"></span>
+                </div>
+                <div class="app-list-item-content">
+                    <h2 class="app-list-item-header">Match spillet</h2>
+                    <span class="app-list-item-text">
+                        {{match.CreateDate}}
+                    </span>
+                    <a href="#/match/{{match.Id}}">Se mere</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

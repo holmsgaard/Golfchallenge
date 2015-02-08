@@ -1,0 +1,18 @@
+﻿<div class="section section-white app-content">
+    <form id="matchAddPlayer" method="post">
+        <div class="form-fieldwrapper">
+            <label>Spiller</label>
+            <select id="matchAddPlayerId" name="PlayerId" class="form-data-players">
+                <option value="">Vælg spiller</option>
+            </select>
+            <span class="field-validation-valid" data-valmsg-for="PlayerId" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-fieldwrapper">
+            <label>Score:</label>
+            <input class="text-box single-line" data-val="true" data-val-number="The field Score must be a number." id="Score" name="Score" type="number" value="">
+        </div>
+        <div class="form-fieldwrapper">
+            <input type="submit" value="Create" class="button">
+        </div>
+    </form>
+</div>

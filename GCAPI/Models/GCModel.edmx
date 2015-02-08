@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="golfchallengeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Players">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Scorecards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="MatchId" Type="int" Nullable="false" />
+          <Property Name="Score" Type="int" />
+          <Property Name="Strokes" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Scores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScorecardId" Type="int" Nullable="false" />
+          <Property Name="Strokes" Type="int" />
+          <Property Name="Score" Type="int" />
+        </EntityType>
+        <Association Name="FK_Scorecards_Matches">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="1" />
+          <End Role="Scorecards" Type="Self.Scorecards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scorecards">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scorecards_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="Scorecards" Type="Self.Scorecards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scorecards">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scores_Scorecards">
+          <End Role="Scorecards" Type="Self.Scorecards" Multiplicity="1" />
+          <End Role="Scores" Type="Self.Scores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scorecards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scores">
+              <PropertyRef Name="ScorecardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="golfchallengeModelStoreContainer">
+          <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scorecards" EntityType="Self.Scorecards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scores" EntityType="Self.Scores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Scorecards_Matches" Association="Self.FK_Scorecards_Matches">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="Scorecards" EntitySet="Scorecards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scorecards_Players" Association="Self.FK_Scorecards_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="Scorecards" EntitySet="Scorecards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scores_Scorecards" Association="Self.FK_Scores_Scorecards">
+            <End Role="Scorecards" EntitySet="Scorecards" />
+            <End Role="Scores" EntitySet="Scores" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="golfchallengeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Scorecards" Relationship="golfchallengeModel.FK_Scorecards_Matches" FromRole="Match" ToRole="Scorecard" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Scorecards" Relationship="golfchallengeModel.FK_Scorecards_Players" FromRole="Player" ToRole="Scorecard" />
+        </EntityType>
+        <EntityType Name="Scorecard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="MatchId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Scores" Relationship="golfchallengeModel.FK_Scores_Scorecards" FromRole="Scorecard" ToRole="Score" />
+          <NavigationProperty Name="Match" Relationship="golfchallengeModel.FK_Scorecards_Matches" FromRole="Scorecard" ToRole="Match" />
+          <NavigationProperty Name="Player" Relationship="golfchallengeModel.FK_Scorecards_Players" FromRole="Scorecard" ToRole="Player" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="Strokes" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScorecardId" Type="Int32" Nullable="false" />
+          <Property Name="Strokes" Type="Int32" />
+          <Property Name="Score1" Type="Int32" />
+          <NavigationProperty Name="Scorecard" Relationship="golfchallengeModel.FK_Scores_Scorecards" FromRole="Score" ToRole="Scorecard" />
+        </EntityType>
+        <EntityContainer Name="golfchallengeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Matches" EntityType="Self.Match" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <EntitySet Name="Scorecards" EntityType="Self.Scorecard" />
+          <EntitySet Name="Scores" EntityType="Self.Score" />
+          <AssociationSet Name="FK_Scores_Scorecards" Association="golfchallengeModel.FK_Scores_Scorecards">
+            <End Role="Scorecard" EntitySet="Scorecards" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scorecards_Matches" Association="golfchallengeModel.FK_Scorecards_Matches">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="Scorecard" EntitySet="Scorecards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scorecards_Players" Association="golfchallengeModel.FK_Scorecards_Players">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Scorecard" EntitySet="Scorecards" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Scores_Scorecards">
+          <End Type="golfchallengeModel.Scorecard" Role="Scorecard" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="golfchallengeModel.Score" Role="Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scorecard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="ScorecardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scorecards_Matches">
+          <End Type="golfchallengeModel.Match" Role="Match" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="golfchallengeModel.Scorecard" Role="Scorecard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scorecard">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scorecards_Players">
+          <End Type="golfchallengeModel.Player" Role="Player" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="golfchallengeModel.Scorecard" Role="Scorecard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scorecard">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="golfchallengeModelStoreContainer" CdmEntityContainer="golfchallengeEntities">
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="golfchallengeModel.Match">
+              <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="golfchallengeModel.Player">
+              <MappingFragment StoreEntitySet="Players">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scorecards">
+            <EntityTypeMapping TypeName="golfchallengeModel.Scorecard">
+              <MappingFragment StoreEntitySet="Scorecards">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Strokes" ColumnName="Strokes" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scores">
+            <EntityTypeMapping TypeName="golfchallengeModel.Score">
+              <MappingFragment StoreEntitySet="Scores">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ScorecardId" ColumnName="ScorecardId" />
+                <ScalarProperty Name="Strokes" ColumnName="Strokes" />
+                <ScalarProperty Name="Score1" ColumnName="Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

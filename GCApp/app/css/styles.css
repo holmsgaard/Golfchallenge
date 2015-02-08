@@ -1,0 +1,22 @@
+body{
+    font-family: Arial;
+    background: #21242e;
+    color: #fff;
+}
+
+/* Layout */
+#app-header {
+    padding: 20px;
+    width: 100%;
+    color: #fff;
+    background: #393f4f;
+    text-align: center;
+}
+
+#app-footer {
+    padding: 20px;
+    width: 100%;
+    color: #fff;
+    background: #393f4f;
+    text-align: center;
+}

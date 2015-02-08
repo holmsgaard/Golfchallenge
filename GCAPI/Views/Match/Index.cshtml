@@ -1,0 +1,85 @@
+﻿@model GCAPI.Models.LeaderboardData
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("_SubHeaderPartial")
+
+<div class="app-main">
+    <div class="section app-content">
+        <h2>Leaderboard</h2>
+        <p>Se en liste over stillingen og de enkelte matches, som er spillet i indeværende sæson!</p>
+    </div>
+
+    <div class="section section-white app-content">
+        <table class="table" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Spiller</th>
+                <th>Slag (gns.)</th>
+                <th>Point (gns.)</th>
+                <th>Antal matches</th>
+            </tr>
+            @foreach (var player in Model.LeaderboardPlayers)
+            {
+                int scScore = 0;
+                int scScoreCount = 0;
+                int scScoreAvg = 0;
+                int scStrokes = 0;
+                int scStrokesCount = 0;
+
+                foreach (var scorecard in player.Scorecards)
+                {
+                    if (!String.IsNullOrEmpty(scorecard.Score.ToString()))
+                    {
+                        scScore += Convert.ToInt32(scorecard.Score);
+                        scScoreCount++;
+                    }
+
+                    if (!String.IsNullOrEmpty(scorecard.Strokes.ToString()))
+                    {
+                        scStrokes += Convert.ToInt32(scorecard.Strokes);
+                        scStrokesCount++;
+                    }
+                }
+
+                scScoreAvg = scScore / scScoreCount;
+                <tr>
+                    <td>@player.NickName (@player.Id)</td>
+                    <td>@scStrokes (@scStrokesCount)</td>
+                    <td>
+                        @scScoreAvg (@scScoreCount)
+                    </td>
+                    <td> (@scScoreCount matches)</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="section app-content">
+        <h3>Historik</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Titel
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var match in Model.Matches)
+            {
+                <tr>
+                    <td>
+                        <a href="/Match/Details/@match.Id">@match.Description</a>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = match.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = match.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

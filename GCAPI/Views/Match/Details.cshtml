@@ -1,0 +1,46 @@
+﻿@model GCAPI.Models.MatchData
+
+@{
+    ViewBag.Title = "Details";
+}
+@Html.Partial("_SubHeaderPartial")
+
+<div class="app-main">
+    <div class="section section-white app-content">
+        <h1>Match</h1>
+        <hr />
+        <h4>Spillere</h4>
+        <table class="table">
+            <tr>
+                <th>Spiller</th>
+                <th>Slag</th>
+                <th>Point</th>
+            </tr>
+            @foreach (var scorecard in Model.Scorecards)
+            {
+                var scores = scorecard.Scores.Where(s => s.Scorecard.PlayerId == scorecard.PlayerId);
+                var scoreCount = 0;
+                <tr data-scorecardid="@scorecard.Id">
+                    <td>@scorecard.Player.NickName (@scorecard.PlayerId)</td>
+                    <td>@scorecard.Strokes</td>
+                    <td>@scorecard.Score</td>
+
+                    @*<ul>
+                            @foreach (var score in scores) {
+                                <li>
+                                    Count: @scoreCount<br/>
+                                    Strokes: @score.Strokes
+                                    Score: @score.Score1
+                                </li>
+                                scoreCount++;
+                            }
+                        </ul>*@
+
+                </tr>
+            }
+        </table>
+
+        <a href="/Scorecard/Create?matchId=@Model.Id" class="button">Tilføj spiller</a>
+        <a href="/Match/" class="button">Færdig!</a>
+    </div>
+    </div>

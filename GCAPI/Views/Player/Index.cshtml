@@ -1,0 +1,47 @@
+﻿@model IEnumerable<GCAPI.Models.Player>
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("_SubHeaderPartial")
+
+<div class="app-main">
+    <div class="section app-content">
+        <h2>Spillere</h2>
+        <p>Se en liste over spillere og opdater deres stats!</p>
+    </div>
+    <div class="section section-white app-content">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NickName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NickName)
+                    </td>
+                    <td>
+                        <a href="/player/Edit/@item.Id"><span class="icon-pencil"></span>Rediger</a>
+                        <a href="/player/Delete/@item.Id"><span class="icon-remove"></span>Slet</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <a href="/player/Create" class="button">Tilføj spiller</a>
+    </div>
+
+    
+</div>
+

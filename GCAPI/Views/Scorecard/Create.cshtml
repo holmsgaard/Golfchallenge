@@ -1,0 +1,30 @@
+﻿@model GCAPI.Models.Scorecard
+
+@{
+    ViewBag.Title = "Create";
+}
+@Html.Partial("_SubHeaderPartial")
+
+<div class="app-main">
+    <div class="section section-white app-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-fieldwrapper">
+                <label>Spiller</label>
+                @Html.DropDownList("PlayerId", "Vælg spiller")
+                @Html.ValidationMessageFor(model => model.PlayerId)
+            </div>
+
+            <div class="form-fieldwrapper">
+                <label>Score:</label>
+                @Html.EditorFor(model => model.Score)
+            </div>
+            
+            <div class="form-fieldwrapper">
+                <input type="submit" value="Create" class="button" />
+            </div>
+        }
+    </div>
+</div>
