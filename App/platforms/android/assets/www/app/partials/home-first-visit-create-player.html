@@ -1,0 +1,18 @@
+﻿<div class="app-dialog">
+    <header class="app-dialog-header">
+        <a class="app-dialog-header-close" href="#/home-first-visit">x</a>
+        <span class="app-dialog-header-text">Ny spiller</span>
+    </header>
+    <form class="app-dialog-form" ng-submit="submit()" data-match-id="{{newMatchId}}">
+        <div class="app-dialog-form-input">
+            <label>Navn</label>
+            <input ng-model="name" type="text" />
+        </div>
+        <div class="app-dialog-form-input">
+            <label>Hcp</label>
+            <input ng-model="hcp" type="text" />
+        </div>
+        <a class="app-button app-button-flat" href="#/home-first-visit">Fortryd</a>
+        <button type="submit" class="app-button">Godkend og gå videre</button>
+    </form>
+</div>

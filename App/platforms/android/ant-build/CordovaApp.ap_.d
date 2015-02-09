@@ -45,7 +45,8 @@ C:\Git\Golfchallenge\App\platforms\android\assets\www\app\js\routers.js \
 C:\Git\Golfchallenge\App\platforms\android\assets\www\app\js\vendor \
 C:\Git\Golfchallenge\App\platforms\android\assets\www\app\js\vendor\angular-route.js \
 C:\Git\Golfchallenge\App\platforms\android\assets\www\app\js\vendor\angular.js \
-C:\Git\Golfchallenge\App\platforms\android\assets\www\app\partials\dialog-player.html \
+C:\Git\Golfchallenge\App\platforms\android\assets\www\app\partials\home-first-visit-create-player.html \
+C:\Git\Golfchallenge\App\platforms\android\assets\www\app\partials\home-first-visit.html \
 C:\Git\Golfchallenge\App\platforms\android\assets\www\app\partials\home.html \
 C:\Git\Golfchallenge\App\platforms\android\assets\www\app\partials\match-new.html \
 C:\Git\Golfchallenge\App\platforms\android\assets\www\app\partials\match.html \

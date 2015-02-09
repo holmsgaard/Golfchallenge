@@ -8,6 +8,14 @@ golfchallengeApp.config(function ($compileProvider) {
                 templateUrl: 'app/partials/home.html',
                 controller: 'HomeCtrl'
             }).
+            when('/home-first-visit', {
+                templateUrl: 'app/partials/home-first-visit.html',
+                controller: 'HomeFirstVisitCtrl'
+            }).
+            when('/home-first-visit-create-player', {
+                templateUrl: 'app/partials/home-first-visit-create-player.html',
+                controller: 'HomeFirstVisitCreatePlayerCtrl'
+            }).
             when('/match-new', {
                 templateUrl: 'app/partials/match-new.html',
                 controller: 'MatchNewCtrl'

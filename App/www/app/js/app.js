@@ -1,20 +1,15 @@
-﻿var client = new WindowsAzure.MobileServiceClient(
-    "https://jcdgc.azure-mobile.net/",
-    "fuCCmvlVagOVdGSZLiuuiWjNTtEdzs89"
-);
-
-var golfchallengeApp = angular.module('golfchallengeApp', [
-  'ngRoute',
-  'golfchallengeControllers'
-]);
-
-
-
+﻿//var client = new WindowsAzure.MobileServiceClient(
+//    "https://jcdgc.azure-mobile.net/",
+//    "fuCCmvlVagOVdGSZLiuuiWjNTtEdzs89"
+//);
 
 var app = {
     // Application Constructor
     initialize: function () {
         this.bindEvents();
+
+        // Test
+        //app.onDeviceReady();
     },
     // Bind Event Listeners
     //
@@ -28,16 +23,27 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-        // Inject online data ?
+        //if (typeof (localStorage['data']) == 'undefined') {
+        //    app.data = {
+        //        settings: {
+        //            createDate: new Date(),
+        //            firstVisit: true
+        //        },
+        //        matches: [],
+        //        players: [],
+        //        scorecards: []
+        //    };
+        //    localStorage['data'] = JSON.stringify(app.data);
+        //}
+        //else {
+        //    app.data = JSON.parse(localStorage['data']);
+        //}
 
-        console.log(window.location);
+        //window.location = "/#/home"
+
         // Azure connection
-  
+
         // Init data obj if first login??
-
-
-
-
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
@@ -49,12 +55,12 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
-};
+    },
 
-app.initialize();
+    updateLocalStorage: function () {
+        localStorage['data'] = JSON.stringify(app.data);
+    },
 
-var app = {
     dataFormat: {
         formatDate: function (unixdate) {
             console.log(unixdate);
@@ -73,4 +79,13 @@ var app = {
         }
     }
 };
+
+app.initialize();
+
+var golfchallengeApp = angular.module('golfchallengeApp', [
+  'ngRoute',
+  'golfchallengeControllers'
+]);
+
+
 
