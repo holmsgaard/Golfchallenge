@@ -55,26 +55,12 @@ input[type="tel"],
 input[type="time"],
 input[type="url"],
 textarea {
-  -webkit-appearance: none;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  background-color: white;
-  font-family: inherit;
-  border: 1px solid #cccccc;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.75);
-  display: block;
-  font-size: 1.5rem;
-  margin: 0 0 2rem 0;
-  padding: 2rem;
-  width: 100%;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;
-  -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
-  transition: box-shadow 0.45s, border-color 0.45s ease-in-out; }
+  font-size:20px;
+  padding:10px 10px 10px 0;
+  display:block;
+  width:100%;
+  border:none;
+  border-bottom:1px solid #c1c1c1;}
   input[type="text"]:focus,
   input[type="password"]:focus,
   input[type="date"]:focus,
@@ -89,10 +75,7 @@ textarea {
   input[type="time"]:focus,
   input[type="url"]:focus,
   textarea:focus {
-    -webkit-box-shadow: 0 0 5px #999999;
-    -moz-box-shadow: 0 0 5px #999999;
-    box-shadow: 0 0 5px #999999;
-    border-color: #999999; }
+    outline:none; }
   input[type="text"]:focus,
   input[type="password"]:focus,
   input[type="date"]:focus,
@@ -1155,24 +1138,32 @@ label.player-select select {
  /* Generel cards */
 .card {
     background: #fff;
-    padding: 15px;
-    margin: 15px;
-    border-radius: 7px;
+    margin: 0 15px 15px 15px;
+    border-radius: 3px;
     border-bottom: 1px solid #999;
     border-right: 1px solid #c1c1c1;
-    font-size: 1em;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+    font-size: .9em;
+    color: #333;
 }
 
 .card-header {
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 700;
-    border-bottom: 1px solid #cfcfcf;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+    border-bottom: 1px solid #efefef;
+    padding: 20px;
 }
 
 .card-content {
     overflow: hidden;
+    font-weight: 100;
+    line-height: 1.1em;
+    padding: 20px;
+}
+
+.card-content p {
+    margin: 0;
+    
 }
 
 .card-functions {
@@ -1352,6 +1343,14 @@ label.player-select select {
 .app-text {
     line-height: 1.4em;
 }
+
+.devider {
+    background: #efefef;
+    margin: 15px 0;
+    height: 1px;
+    width: 100%;
+    border: 0;
+}
 /* App lists */
 .app-list {
     margin: 0;
@@ -1363,6 +1362,15 @@ label.player-select select {
         overflow: hidden;
         position: relative;
         padding: 20px 0 0 0;
+    }
+
+    .app-list .app-list-item .secondary-action {
+        background: blue;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 10px;
+        color: #fff;
     }
 
     .app-list .app-list-item-icon {
@@ -1396,19 +1404,26 @@ label.player-select select {
 
     /* Buttons */
     .app-button {
-        padding: 20px;
+        padding: 15px 20px;
         display: inline-block;
         text-align: center;
         background-color: #4c93ea;
         border: 0;
-        border-radius: 5px;
-        -moz-border-radius:: 5px;
-        -webkit-border-radius: 5px;
+        border-radius: 3px;
         color: #fff;
         font-size: 1rem;
         outline: none;
         text-decoration: none;
     }
+
+.app-button-group {
+    margin: 15px 0;
+    overflow: hidden;
+    text-align: right;
+}
+
+
+
 
     .app-button:hover {
         background-color: #5fa1f1;
@@ -1438,6 +1453,26 @@ label.player-select select {
     top: -24px;
 }
 
+/* Topbar */
+/* Dialogs */
+.app-topbar {
+    background: #000;
+    color: #fff;
+}
+
+.app-topbar-back {
+    display: inline-block;
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.app-topbar-text {
+    display: inline-block;
+    padding: 20px 20px 20px 0;
+    font-size: 1.2em;
+}
+
 /* Dialogs */
 .app-dialog {
     position: absolute;
@@ -1458,6 +1493,15 @@ label.player-select select {
 }
 
 /* Form elements */
+.app-dialog-form-input {
+    margin: 5px 0;
+}
+
+.app-dialog-form-input label {
+    color: #999999;
+    font-size: .8em;
+}
+
 .app-dialog-form-select {
     position: relative;
     margin: 10px 20px;

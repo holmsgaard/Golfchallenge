@@ -5,21 +5,7 @@ console.log('controllers loaded');
 golfchallengeControllers.controller('HomeCtrl', ['$scope', '$http',
   function ($scope, $http) {
       
-      if (typeof (localStorage['data']) == 'undefined') {
-          app.data = {
-              settings: {
-                  createDate: new Date(),
-                  firstVisit: true
-              },
-              matches: [],
-              players: [],
-              scorecards: []
-          };
-          localStorage['data'] = JSON.stringify(app.data);
-      }
-      else {
-          app.data = JSON.parse(localStorage['data']);
-      }
+      
 
       $scope.firstVisit = app.data.settings.firstVisit;
 
@@ -89,7 +75,43 @@ golfchallengeControllers.controller('MatchNewCtrl', ['$scope', '$http',
           scorecards: []
       };
 
+      $scope.date = match.createDate;
       $scope.players = app.data.players;
+      $scope.selectedPlayers = [];
+
+      if ($scope.players.length > 0) {
+          $scope.players[0].selected = true;
+          $scope.selectedPlayers.push($scope.players[0]);
+      }
+
+      $scope.$watch(function () {
+          $scope.selectedPlayers = [];
+          angular.forEach($scope.players, function (obj, k) {
+              if (obj.selected) {
+                  $scope.selectedPlayers.push(obj);
+              }
+          });
+      });
+
+      $scope.createMatch = function () {
+          var scorecards = [];
+          for (var i = 0; i < $scope.selectedPlayers.length; i++) {
+              var player = $scope.selectedPlayers[i];
+              var scorecard = {
+                  playerId: player.id,
+                  playerName: player.name,
+                  playerHcp: player.hcp
+              };
+              scorecards.push(scorecard);
+          }
+          match.scorecards = scorecards;
+
+          app.data.matches.push(match);
+
+          window.location = '#/';
+          console.log(match);
+      }
+
 
       
 
@@ -108,6 +130,8 @@ golfchallengeControllers.controller('MatchNewCtrl', ['$scope', '$http',
       //client.getTable("players").read().then(function (players) {
       //    $scope.players = players;
       //});
+
+
 
       $scope.selectPlayer = function (playerId) {
           console.log(this, event);

@@ -82,6 +82,22 @@ var app = {
 
 app.initialize();
 
+if (typeof (localStorage['data']) == 'undefined') {
+    app.data = {
+        settings: {
+            createDate: new Date(),
+            firstVisit: true
+        },
+        matches: [],
+        players: [],
+        scorecards: []
+    };
+    localStorage['data'] = JSON.stringify(app.data);
+}
+else {
+    app.data = JSON.parse(localStorage['data']);
+}
+
 var golfchallengeApp = angular.module('golfchallengeApp', [
   'ngRoute',
   'golfchallengeControllers'
