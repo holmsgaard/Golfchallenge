@@ -1,0 +1,96 @@
+﻿<div class="app-topbar">
+    <a href="#/" class="app-topbar-back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
+    </a>
+</div>
+
+<div class="" ng-swipe-left="swipeTest()">
+    <div class="section section-nopadding">
+        <div class="">
+            <div class="hole-header">
+                <a class="hole-nav hole-nav-left" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="36" height="36" viewBox="0 0 36 36"><path d="M23.12 11.12L21 9l-9 9 9 9 2.12-2.12L16.24 18z" /></svg>
+                </a>
+                <div class="hole-header-content">
+                    <h1 class="">HUL {{holeNumber}}</h1>
+                    <div class="hole-header-content-info">
+                        <span>Par: {{currentHole.par}}</span>
+                        <span>Hcp: {{currentHole.key}}</span>
+                    </div>
+                </div>
+                <a class="hole-nav hole-nav-right" href="#/match/{{match.id}}/{{nextHoleNumber}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="36" height="36" viewBox="0 0 36 36"><path d="M15 9l-2.12 2.12L19.76 18l-6.88 6.88L15 27l9-9z" /></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-white section-nopadding">
+        <h2 class="app-list-header">Scorekort</h2>
+        <ul class="app-list">
+            <li ng-repeat="scorecard in scorecards track by $index" ng-click="selectPlayer(scorecard.playerId)" class="app-list-item app-text" data-id="{{scorecard.playerId}}">
+                <div class="app-list-item-icon">
+                    <span class="text">P</span>
+                </div>
+                <div class="app-list-item-content">
+                    <h2 class="app-list-item-header">{{scorecard.playerName}}</h2>
+                    <span class="app-list-item-text">
+                        Point: {{scorecard.playerScores[holeIndex].score}}
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="app-dialog-overlay" ng-swipe-right="scorecardVisible = false" ng-click="scorecardVisible = false" ng-class="scorecardVisible ? 'app-dialog-overlay-visible' : ''"></div>
+<div class="app-toggle-dialog" ng-swipe-right="scorecardVisible = false" ng-class="scorecardVisible ? 'app-toggle-dialog-visible' : ''">
+    <div class="app-toggle-dialog-header">
+        {{activeScorecard.playerName}}
+    </div>
+    <div class="app-toggle-dialog-content">
+        <div class="app-dialog-form-input">
+            <label>Slag</label>
+            <input ng-model="activeScorecardHole.strokes" type="number" />
+        </div>
+        <div class="app-dialog-form-input">
+            <label>Point</label>
+            <input ng-model="activeScorecardHole.score" type="number" />
+        </div>
+        <!--<button ng-click="saveScorecard()" class="app-button">Gem og luk</button>-->
+
+        <div class="app-keys">
+            <label class="app-keys-label">
+                Slag
+            </label>
+            <div class="app-keys-container">
+                <button ng-click="activeScorecardHole.strokes = 1">1</button>
+                <button ng-click="activeScorecardHole.strokes = 2">2</button>
+                <button ng-click="activeScorecardHole.strokes = 3">3</button>
+                <button ng-click="activeScorecardHole.strokes = 4">4</button>
+                <button ng-click="activeScorecardHole.strokes = 5">5</button>
+                <button ng-click="activeScorecardHole.strokes = 6">6</button>
+                <button ng-click="activeScorecardHole.strokes = 7">7</button>
+                <button ng-click="activeScorecardHole.strokes = 8">8</button>
+                <button ng-click="activeScorecardHole.strokes = 9">9</button>
+                <button ng-click="activeScorecardHole.strokes = 10">10</button>
+            </div>
+        </div>
+        <div class="app-keys">
+            <label class="app-keys-label">
+                Points
+            </label>
+            <div class="app-keys-container">
+                <button ng-click="activeScorecardHole.score = 1">1</button>
+                <button ng-click="activeScorecardHole.score = 2">2</button>
+                <button ng-click="activeScorecardHole.score = 3">3</button>
+                <button ng-click="activeScorecardHole.score = 4">4</button>
+                <button ng-click="activeScorecardHole.score = 5">5</button>
+                <button ng-click="activeScorecardHole.score = 6">6</button>
+                <button ng-click="activeScorecardHole.score = 7">7</button>
+                <button ng-click="activeScorecardHole.score = 8">8</button>
+                <button ng-click="activeScorecardHole.score = 9">9</button>
+                <button ng-click="activeScorecardHole.score = 10">10</button>
+            </div>
+        </div>
+    </div>
+</div>

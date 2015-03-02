@@ -8,6 +8,10 @@ golfchallengeApp.config(function ($compileProvider) {
                 templateUrl: 'app/partials/home.html',
                 controller: 'HomeCtrl'
             }).
+            when('/court-new', {
+                templateUrl: 'app/partials/court-new.html',
+                controller: 'CourtNewCtrl'
+            }).
             when('/home-first-visit', {
                 templateUrl: 'app/partials/home-first-visit.html',
                 controller: 'HomeFirstVisitCtrl'
@@ -20,15 +24,26 @@ golfchallengeApp.config(function ($compileProvider) {
                 templateUrl: 'app/partials/match-new.html',
                 controller: 'MatchNewCtrl'
             }).
-            when('/match', {
+            //when('/match', {
+            //    templateUrl: 'app/partials/match.html',
+            //    controller: 'MatchCtrl'
+            //}).
+            when('/match/:matchId', {
                 templateUrl: 'app/partials/match.html',
                 controller: 'MatchCtrl'
             }).
-            when('/match/:matchId', {
-                templateUrl: 'app/partials/match.html',
-
-                controller: 'MatchDetailsCtrl'
+            when('/match/:matchId/:holeNumber', {
+                templateUrl: 'app/partials/hole.html',
+                controller: 'MatchHoleCtrl'
             }).
+            when('/player-new', {
+                templateUrl: 'app/partials/player-new.html',
+                controller: 'PlayerNewCtrl'
+            }).
+            when('/friends', {
+                    templateUrl: 'app/partials/friends.html',
+                    controller: 'FriendsCtrl'
+                }).
             otherwise({
                 redirectTo: '/'
             });

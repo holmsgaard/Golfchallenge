@@ -1,18 +1,39 @@
-﻿<div class="section section-white app-content">
-    <h1>Match</h1>
-    <hr>
-    <h4>Spillere</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Spiller</th>
-                <th>Slag</th>
-                <th>Point</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+﻿<div class="app-topbar">
+    <a href="#/" class="app-topbar-back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
+    </a>
+</div>
 
-    <a href="/Scorecard/Create?matchId=36" class="button action-match-addPlayer">Tilføj spiller</a>
-    <a href="/Match/" class="button">Færdig!</a>
+<div class="section section-padding">
+    <div class="app-header-small app-content">
+        <h1 class="">Match</h1>
+        <h2>{{match.course.name}} den {{match.createDate | cmdate:'dd MMMM yyyy'}}</h2>
+    </div>
+</div>
+
+<div class="section section-white section-nopadding">
+    <h2 class="app-list-header">Scorekort</h2>
+    <ul class="app-list">
+        <li ng-repeat="scorecard in scorecards track by $index" ng-click="selectPlayer($index)" class="app-list-item app-text" data-id="{{scorecard.playerId}}">
+            <div class="app-list-item-icon">
+                <span class="text">P</span>
+            </div>
+            <div class="app-list-item-content">
+                <h2 class="app-list-item-header">{{scorecard.playerName}}</h2>
+                <span class="app-list-item-text">
+                    Hcp: {{scorecard.playerHcp}}
+                </span>
+                <!--<span class="app-list-item-text">
+                    Slag: {{scorecard.strokes}}
+                </span>
+                <span class="app-list-item-text">
+                    Point: {{scorecard.score}}
+                </span>-->
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="section">
+    <a href="#/match/{{match.id}}/1" class="app-button">Sæt igang</a>
 </div>

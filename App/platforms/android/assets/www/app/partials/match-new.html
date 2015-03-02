@@ -1,5 +1,7 @@
 ﻿<div class="app-topbar">
-    <a href="#/" class="app-topbar-back">&lt;</a>
+    <a href="#/" class="app-topbar-back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg>
+    </a>
     <span class="app-topbar-text">Ny match</span>
 </div>
 
@@ -8,6 +10,13 @@
         <div class="app-dialog-form-input disabled" data-id="">
             <label>Spilledato</label>
             <input type="text" ng-model="date" />
+        </div>
+        <div class="app-dialog-form-input" data-id="">
+            <label>Spilledato</label>
+            <select ng-model="court" name="court">
+                <option>Vælg bane</option>
+                <option ng-repeat="court in courts track by $index" value="{{$index}}">{{court.name}}</option>
+            </select>
         </div>
     </div>
     <hr class="devider"/>
@@ -27,11 +36,10 @@
                 <input type="checkbox" class="secondary-action" ng-model="player.selected"/>
             </li>
         </ul>
-        <div class="app-button-group">
-            <button class="app-button" ng-click="showNewPlayer = ! showNewPlayer">Tilføj spiller</button>
-        </div>
     </div>
-    <button ng-click="createMatch()" class="app-header-action app-button-action">&gt;</button>
+    <button ng-click="createMatch()" class="app-header-action app-button-action app-button-action-fixed">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="36" height="36" viewBox="0 0 36 36"><path d="M13.5 24.26L7.24 18l-2.12 2.12 8.38 8.38 18-18-2.12-2.12z" /></svg>
+    </button>
     <!--
     <a href="" ng-click="test()">TEST</a>-->
 </div>

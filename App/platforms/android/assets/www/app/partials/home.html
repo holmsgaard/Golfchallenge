@@ -1,38 +1,97 @@
-﻿<div id="viewHome" class="view view-active" data-view="home">
-    <header class="app-header app-header-large">
-        <h1 class="app-logo app-logo-large">Golf<br />Challenge</h1>
-        <a href="#/match-new" class="app-header-action app-button-action">+</a>
-    </header>
+﻿<div class="app-topbar">
+    <a class="app-topbar-back" ng-click="menuVisible = true">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="30" height="30" viewBox="0 0 30 30"><path d="M4 27h28v-3H4v3zm0-8h28v-3H4v3zM4 8v3h28V8H4z" /></svg>
+    </a>
+</div>
 
-    <div class="section section-white app-content">
-        <h2 class="app-list-header">Afviklede matches</h2>
-        <ul class="app-list" id="viewHome-matchList">
-            <li ng-repeat="match in matches" class="app-list-item app-text" data-id="{{match.Id}}">
-                <div class="app-list-item-icon">
-                    <span class="icon-trophy"></span>
-                </div>
-                <div class="app-list-item-content">
-                    <h2 class="app-list-item-header">Match spillet</h2>
-                    <span class="app-list-item-text">
-                        {{match.CreateDate}}
-                    </span>
-                    <a href="#/match/{{match.Id}}">Se mere</a>
-                </div>
-            </li>
-        </ul>
+<header class="app-header app-header-large">
 
+    <h1 class="app-logo app-logo-large">Golf<br />Challenge</h1>
+
+    <!--<a href="#/match-new" class="app-header-action app-button-action">+</a>-->
+</header>
+
+<div class="section section-white section-nopadding">
+    <div class="app-tabs">
+        <a href="#" class="app-tab app-tab-active">Aktivitet</a>
+        <a href="#" class="app-tab">Leaderboards</a>
     </div>
+    <ul class="app-list" id="viewHome-matchList">
+        <li ng-repeat="match in matches track by $index" ng-click="goToMatch($index)" class="app-list-item app-text" data-id="{{$index}}">
+            <div class="app-list-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill-opacity=".5" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zM12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" /></svg>
+            </div>
+            <div class="app-list-item-content">
+                <h2 class="app-list-item-header">Match spillet i {{match.courtName}}</h2>
+                <div class="app-list-item-text">
+                    <div>
+                        {{match.createDate | cmdate:'dd MMMM yyyy'}}
+                    </div>
+                    <div class="app-list-players">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" /></svg>
+                        <span class="app-list-player" ng-repeat="player in match.scorecards">{{player.playerName}}</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 
-    <!--<div class="section section-gray">
-        <div class="card">
-            <div class="card-header">
-                Matches
-            </div>
-            <div class="card-content">
-                <p>
-                    Du har indnu ikke spillet nogle matches!
-                </p>
-            </div>
+
+</div>
+
+<!--<div class="section section-gray">
+    <div class="card">
+        <div class="card-header">
+            Matches
         </div>
-    </div>-->
+        <div class="card-content">
+            <p>
+                Du har indnu ikke spillet nogle matches!
+            </p>
+        </div>
+    </div>
+</div>-->
+<!--<a href="#/match-new" class="app-button-action app-button-action-fixed">+</a>-->
+<button ng-click="overlapMenuVisible = true" class="app-button-action app-button-action-fixed">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" /></svg>
+</button>
+<div ng-click="overlapMenuVisible = false" class="app-overlay-menu" ng-class="overlapMenuVisible ? 'app-overlay-menu-visible' : ''">
+    <div class="app-overlay-menu-items">
+        <button ng-click="nav('#/player-new')">
+            Tilføj ny spiller
+        </button>
+        <button ng-click="nav('#/match-new')">
+            Ny match
+        </button>
+    </div>
+</div>
+
+
+<div class="app-dialog-overlay" ng-click="menuVisible = false" ng-class="menuVisible ? 'app-dialog-overlay-visible' : ''"></div>
+<div class="app-toggle-dialog-left" ng-class="menuVisible ? 'app-toggle-dialog-left-visible' : ''">
+    <div class="app-toggle-dialog-header" id="mainToggleMenu">
+        Spilleroplysninger
+    </div>
+    <div class="app-toggle-dialog-content">
+        <ul>
+            <li>
+                <a href="#">Dine turneringer (N/A)</a>
+            </li>
+            <li>
+                <a href="#">Venner (N/A)</a>
+            </li>
+            <li>
+                <a href="#">Statistik (N/A)</a>
+            </li>
+            <li class="app-toggle-dialog-devider"></li>
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z" /></svg>
+                <a ng-click="syncCourts()">Sync data</a>
+            </li>
+            <!--<li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13 7h-2v2h2V7zm0 4h-2v6h2v-6zm4-9.99L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" /></svg>
+                <a ng-click="resetData()">Slet alt data</a>
+            </li>-->
+        </ul>
+    </div>
 </div>
