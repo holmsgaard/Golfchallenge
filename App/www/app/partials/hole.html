@@ -8,7 +8,7 @@
     <div class="section section-nopadding">
         <div class="">
             <div class="hole-header">
-                <a class="hole-nav hole-nav-left" href="#">
+                <a class="hole-nav hole-nav-left" href="#/current-match/{{prevHoleIndex}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="36" height="36" viewBox="0 0 36 36"><path d="M23.12 11.12L21 9l-9 9 9 9 2.12-2.12L16.24 18z" /></svg>
                 </a>
                 <div class="hole-header-content">
@@ -18,7 +18,7 @@
                         <span>Hcp: {{currentHole.key}}</span>
                     </div>
                 </div>
-                <a class="hole-nav hole-nav-right" href="#/match/{{match.id}}/{{nextHoleNumber}}">
+                <a ng-show="!isLastHole" class="hole-nav hole-nav-right" href="#/current-match/{{nextHoleIndex}}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="36" height="36" viewBox="0 0 36 36"><path d="M15 9l-2.12 2.12L19.76 18l-6.88 6.88L15 27l9-9z" /></svg>
                 </a>
             </div>
@@ -28,19 +28,25 @@
     <div class="section section-white section-nopadding">
         <h2 class="app-list-header">Scorekort</h2>
         <ul class="app-list">
-            <li ng-repeat="scorecard in scorecards track by $index" ng-click="selectPlayer(scorecard.playerId)" class="app-list-item app-text" data-id="{{scorecard.playerId}}">
+            <li ng-repeat="scorecard in scorecards track by $index" ng-click="selectPlayer($index)" class="app-list-item app-text" data-id="{{scorecard.playerId}}">
                 <div class="app-list-item-icon">
                     <span class="text">P</span>
                 </div>
                 <div class="app-list-item-content">
                     <h2 class="app-list-item-header">{{scorecard.playerName}}</h2>
                     <span class="app-list-item-text">
-                        Point: {{scorecard.playerScores[holeIndex].score}}
+                        Point: {{scorecard.playerScores[holeIndex].score}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Slag: {{scorecard.playerScores[holeIndex].strokes}}
                     </span>
                 </div>
             </li>
         </ul>
     </div>
+
+    <div class="section section-lightgray" ng-show="isLastHole">
+        <a href="/#/" ng-click="endMatch()" class="app-button">Afslut runde</a>
+    </div>
+
 </div>
 <div class="app-dialog-overlay" ng-swipe-right="scorecardVisible = false" ng-click="scorecardVisible = false" ng-class="scorecardVisible ? 'app-dialog-overlay-visible' : ''"></div>
 <div class="app-toggle-dialog" ng-swipe-right="scorecardVisible = false" ng-class="scorecardVisible ? 'app-toggle-dialog-visible' : ''">

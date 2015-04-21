@@ -7,23 +7,30 @@
 
 <div class="section section-white">
     <div class="app-content">
-        <div class="app-dialog-form-input disabled" data-id="">
-            <label>Spilledato</label>
-            <input type="text" ng-model="date" />
-        </div>
-        <div class="app-dialog-form-input" data-id="">
-            <label>Bane</label>
-            <select ng-model="course" name="course">
-                <option>Vælg bane</option>
-                <option ng-repeat="course in courses track by $index" value="{{course.id}}">{{course.name}}</option>
-            </select>
-        </div>
+        <h2 class="app-list-header">Golfbane</h2>
+        <ul class="app-list">
+            <li class="app-list-item app-text" ng-repeat="course in courses track by $index" ng-click="selectCourse($index)" ng-class="course.selected ? 'selected' : ''">
+                <div class="app-list-item-icon">
+                    <span class="text">
+                        C
+                    </span>
+                </div>
+                <div class="app-list-item-content">
+                    <h2 class="app-list-item-header">
+                        {{course.name}}
+                    </h2>
+                    <span class="app-list-item-text">
+                        200m væk
+                    </span>
+                </div>
+            </li>
+        </ul>
     </div>
     <hr class="devider"/>
     <div class="app-content">
         <h2 class="app-list-header">Spillere</h2>
         <ul class="app-list">
-            <li ng-repeat="player in players track by $index" class="app-list-item app-text" data-id="{{player.Id}}">
+            <li ng-repeat="player in players track by $index" ng-class="player.selected ? 'selected' : ''" ng-click="togglePlayer($index)" class="app-list-item app-text" data-id="{{player.Id}}">
                 <div class="app-list-item-icon">
                     <span class="text">?</span>
                 </div>
@@ -33,13 +40,13 @@
                         Hcp: {{player.hcp}}
                     </span>
                 </div>
-                <input type="checkbox" class="secondary-action" ng-model="player.selected"/>
             </li>
         </ul>
     </div>
     <button ng-click="createMatch()" class="app-header-action app-button-action app-button-action-fixed">
         <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="36" height="36" viewBox="0 0 36 36"><path d="M13.5 24.26L7.24 18l-2.12 2.12 8.38 8.38 18-18-2.12-2.12z" /></svg>
     </button>
+    <input type="hidden" ng-model="date" />
     <!--
     <a href="" ng-click="test()">TEST</a>-->
 </div>

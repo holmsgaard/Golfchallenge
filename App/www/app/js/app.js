@@ -130,7 +130,7 @@ var app = {
 
     updateLocalStorageScores: function () {
         localStorage['scores'] = JSON.stringify(app.data.scores);
-        //console.log('updateLocalStorageScorecards()', app.data.scorecards);
+        console.log('updateLocalStorageScores()', app.data.scores);
     },
 
     updateLocalStorageHoles: function () {
@@ -167,6 +167,15 @@ var app = {
                 app.data.holes = holes;
                 app.updateLocalStorageHoles();
             });
+        },
+
+        players: function () {
+            console.log('sync players');
+            var players = [];
+
+            client.getTable("players").read().then(function (response) {
+                app.data.players = response;
+            })
         }
     },
 
@@ -249,6 +258,16 @@ var app = {
                 }
             }
             return null;
+        },
+
+        scorecards: function (matchId) {
+            var list = [];
+            for (var i = 0; i < app.data.scorecards.length; i++) {
+                if (app.data.scorecards[i].matchId == matchId) {
+                    list.push(app.data.scorecards[i]);
+                }
+            }
+            return list;
         }
     }
 };

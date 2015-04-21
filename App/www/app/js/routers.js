@@ -24,6 +24,14 @@ golfchallengeApp.config(function ($compileProvider) {
                 templateUrl: 'app/partials/match-new.html',
                 controller: 'MatchNewCtrl'
             }).
+            when('/current-match', {
+                templateUrl: 'app/partials/match.html',
+                controller: 'CurrentMatchCtrl'
+            }).
+            when('/current-match/:holeIndex', {
+                templateUrl: 'app/partials/hole.html',
+                controller: 'CurrentMatchHoleCtrl'
+            }).
             //when('/match', {
             //    templateUrl: 'app/partials/match.html',
             //    controller: 'MatchCtrl'

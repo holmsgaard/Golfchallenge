@@ -434,7 +434,7 @@ h3 {
     padding: 30px;
     display: block;
     position: relative;
-    box-shadow: 0px 2px 7px rgba(0,0,0,.4);
+    /*box-shadow: 0px 2px 7px rgba(0,0,0,.4);*/
 }
 
 .app-header-large {
@@ -479,7 +479,7 @@ h3 {
 .app-logo {
     text-transform: uppercase;
     font-weight: 700;
-    float: left;
+    padding-bottom: 30px;
 }
 
 .app-logo-large {
@@ -724,6 +724,11 @@ label.player-select select {
     color: #333;
 }
 
+.card-nomargin {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .card-header {
     font-size: 1em;
     font-weight: 700;
@@ -740,8 +745,24 @@ label.player-select select {
 
 .card-content p {
     margin: 0;
-    
 }
+
+.card-footer {
+    font-size: 1em;
+    font-weight: 700;
+    padding: 20px;
+    overflow: hidden;
+}
+
+    .card-footer .card-footer-link {
+        float: right;
+        margin-left: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        text-decoration: none;
+        color: #000;
+        font-size: 1.1em;
+    }
 
 .card-functions {
     margin: 15px -15px -15px -15px;
@@ -964,7 +985,7 @@ label.player-select select {
         display: block;
         overflow: hidden;
         position: relative;
-        padding: 20px 0 0 0;
+        padding: 0;
     }
 
     .app-list .app-list-item .secondary-action {
@@ -992,7 +1013,11 @@ label.player-select select {
         display: block;
         margin-left: 50px;
         border-bottom: 1px solid #ececec;
-        padding: 0 0 20px 0;
+        padding: 20px 0;
+    }
+
+    .app-list .app-list-item.selected .app-list-item-content{
+        background-color: #e2f6f2;
     }
 
     .app-list .app-list-item-text {
@@ -1044,7 +1069,16 @@ label.player-select select {
 }
 
 
-
+#app-splash-action {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    margin-left: -40px;
+    z-index: 10;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}
 
     .app-button:hover {
         background-color: #5fa1f1;

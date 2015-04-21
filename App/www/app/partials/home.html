@@ -9,9 +9,21 @@
     <h1 class="app-logo app-logo-large">Golf<br />Challenge</h1>
 
     <!--<a href="#/match-new" class="app-header-action app-button-action">+</a>-->
+    <div class="card card-nomargin" ng-show="activeMatchVisible">
+        <div class="card-header">
+            Igangværende runde
+        </div>
+        <div class="card-content">
+            Du er i gang med en runde golf, hvad vil du gøre?
+        </div>
+        <div class="card-footer">
+            <a href="#/current-match" class="card-footer-link">Fortsæt</a>
+            <a href="#" ng-click="deleteMatch()" class="card-footer-link">Stop</a>
+        </div>
+    </div>
 </header>
 
-<div class="section section-white section-nopadding">
+<!--<div class="section section-white section-nopadding">
     <div class="app-tabs">
         <a href="#" class="app-tab app-tab-active">Aktivitet</a>
         <a href="#" class="app-tab">Leaderboards</a>
@@ -37,7 +49,7 @@
     </ul>
 
 
-</div>
+</div>-->
 
 <!--<div class="section section-gray">
     <div class="card">
@@ -52,7 +64,7 @@
     </div>
 </div>-->
 <!--<a href="#/match-new" class="app-button-action app-button-action-fixed">+</a>-->
-<button ng-click="overlapMenuVisible = true" class="app-button-action app-button-action-fixed">
+<button ng-click="overlapMenuVisible = true" id="app-splash-action" class="app-button-action app-button-action-fixed">
     <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" /></svg>
 </button>
 <div ng-click="overlapMenuVisible = false" class="app-overlay-menu" ng-class="overlapMenuVisible ? 'app-overlay-menu-visible' : ''">
