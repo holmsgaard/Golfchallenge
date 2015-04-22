@@ -278,6 +278,7 @@ app.dataInit();
 var golfchallengeApp = angular.module('golfchallengeApp', [
   'ngRoute',
   'ngTouch',
+  'golfchallengeServices',
   'golfchallengeControllers'
 ]);
 

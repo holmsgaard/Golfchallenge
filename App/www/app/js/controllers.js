@@ -24,8 +24,13 @@ golfchallengeControllers.run(function ($rootScope) {
         var match = $rootScope.currentMatch;
         if (match) {
             var sqlMatch = {
-                courseid: match.course.id
+                courseid: match.course.id,
+                date: match.createDate
             };
+
+            console.log(match);
+
+            
 
             client.getTable("matches").insert(sqlMatch).done(function (response) {
                 var scorecardTable = client.getTable("scorecards");
@@ -69,8 +74,12 @@ golfchallengeControllers.run(function ($rootScope) {
 });
 
 // Home view controller
-golfchallengeControllers.controller('HomeCtrl', ['$scope', '$http', '$rootScope',
-  function ($scope, $http, $rootScope) {
+golfchallengeControllers.controller('HomeCtrl', ['$scope', '$http', '$rootScope', 'serviceMatches',
+  function ($scope, $http, $rootScope, serviceMatches) {
+
+      
+
+
       $scope.overlapMenuVisible = false;
       $scope.menuVisible = false;
 
@@ -156,6 +165,37 @@ golfchallengeControllers.controller('HomeFirstVisitCreatePlayerCtrl', ['$scope',
 //  function ($scope, $routeParams) {
 //      console.log('match details inited');
 //  }]);
+golfchallengeControllers.controller('MatchesCtrl', ['$scope', 'serviceMatches',
+  function ($scope, serviceMatches) {
+      serviceMatches.fetch().then(function (response) {
+          $scope.$apply(function () {
+              $scope.matches = response;
+
+              
+              console.log($scope.matches);
+          });
+          
+          angular.forEach($scope.matches, function (obj, i) {
+                  obj.wat = "1";
+                  serviceMatches.getCourseById(obj.courseid).then(function (courseResponse) {
+                      $scope.$apply(function () {
+                          obj.course = courseResponse[0];
+                      });
+                  
+                  });
+              
+          })
+
+      });
+  }]).filter('cmdate', [
+    '$filter', function ($filter) {
+        return function (input, format) {
+            return $filter('date')(new Date(input), format);
+        };
+    }
+  ]);
+
+
 
 golfchallengeControllers.controller('MatchNewCtrl', ['$scope', '$http', '$rootScope',
   function ($scope, $http, $rootScope) {
